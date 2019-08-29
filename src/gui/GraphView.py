@@ -4,14 +4,14 @@ from program.SinCalc import SinCalc
 from program.CosCalc import CosCalc
 from program.TanCalc import TanCalc
 
-g_b_xvalue_negative = False
-g_b_phase_negative = False
-
 
 class GraphView(tk.Frame):
     def __init__(self, parent, func, **kwargs):
         tk.Frame.__init__(self, parent, **kwargs)
         self.configure(bg="white")
+
+        self.xvalue_negative = False
+        self.phase_negative = False
 
         try:
             self.configure_graph_function(func)
@@ -165,28 +165,25 @@ class GraphView(tk.Frame):
             button.config(relief=tk.SUNKEN)
 
             if (value == "xvalue"):
-                self.g_b_xvalue_negative = True
+                self.xvalue_negative = True
             elif (value == "phase"):
-                self.g_b_phase_negative = True
+                self.phase_negative = True
         # Else if the button is toggled on, then toggle it off and set the respective global boolean value to false.
         elif (button["relief"] == tk.SUNKEN):
             button.config(relief=tk.RAISED)
 
             if (value == "xvalue"):
-                self.g_b_xvalue_negative = False
+                self.xvalue_negative = False
             elif (value == "phase"):
-                self.g_b_phase_negative = False
+                self.phase_negative = False
 
     def apply_changes(self, graph, func, dyn, tan_dyn, nom_dyn, tan_chk, nom_chk, x, amp, freq, phase):
         # Clear the graph canvas completely.
         graph.delete(tk.ALL)
 
-        global g_b_xvalue_negative
-        global g_b_phase_negative
-
-        if (g_b_xvalue_negative):
+        if (self.xvalue_negative):
             x = "-" + x
-        elif (g_b_phase_negative):
+        elif (self.phase_negative):
             phase = "-" + phase
 
         # Draw the axis.
