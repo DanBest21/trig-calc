@@ -11,4 +11,4 @@ Provides visualisation of the trigometric function graphs, and the tangent/norma
 ### Dependencies
 
 - [Python 3](https://www.python.org/download/releases/3.0/)
-- [Tk](https://www.python.org/download/releases/3.0/) - Provides the graphical user interface for the application.
+- [Tk](https://tkdocs.com/tutorial/install.html) - Provides the graphical user interface for the application.
