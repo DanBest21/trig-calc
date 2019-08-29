@@ -1,12 +1,12 @@
 import Tkinter as tk
 import GraphView as graph
 import TheoryWindow as theory
-import HelpWindow as help
 
 class Menu(tk.Frame):
     def __init__(self, *args, **kwargs):
         tk.Frame.__init__(self, *args, **kwargs)
         self.configure(bg="white")
+        self.master.title("Tangent/Normal Calculator")
 
         lbl_title = tk.Label(self, text="Tangent/Normal Calculator", font="Arial 14 bold underline", bg="white")
         lbl_title.grid(row=0, column=0, padx=5, pady=10)
@@ -37,16 +37,26 @@ class Menu(tk.Frame):
         btn_exit.grid(row=5, column=0, padx=15, pady=(5, 20))
 
     def open_sine_view(self):
-        return
+        frame = graph.GraphView(self.master, "Sine")
+        self.master.title("Tangent/Normal Calculator - Sine Graph")
+        frame.pack()
+        self.destroy()
 
     def open_cosine_view(self):
-        return
+        frame = graph.GraphView(self.master, "Cosine")
+        self.master.title("Tangent/Normal Calculator - Cosine Graph")
+        frame.pack()
+        self.destroy()
 
     def open_tangent_view(self):
-        return
+        frame = graph.GraphView(self.master, "Tangent")
+        self.master.title("Tangent/Normal Calculator - Tangent Graph")
+        frame.pack()
+        self.destroy()
 
     def open_theory_window(self):
         frame = theory.TheoryWindow(self.master)
+        self.master.title("Tangent/Normal Calculator - Theory Definitions")
         frame.pack()
         self.destroy()
 

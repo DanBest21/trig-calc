@@ -1,8 +1,8 @@
-import program.Calc as super
 import math
+import Calc as calc
 
 
-class CosCalc(super.Calc):
+class CosCalc(calc.Calc):
     def calculate_tangent(self, graph, x, amp, freq, phase):
         # Find y, which is found through the equation: "A cos(fx + theta)"
         y = amp * math.cos(math.radians((float(freq) * x) + phase))
@@ -15,18 +15,33 @@ class CosCalc(super.Calc):
         else:
             m = -amp * freq * math.sin(math.radians((float(freq) * x) + phase))
 
-        return super.draw_tangent(graph, x, y, m)
+        return super(CosCalc, self).draw_tangent(graph, x, y, m)
 
     def calculate_normal(self, graph, x, amp, freq, phase):
         # Find y, which is found through the equation: "A cos(fx + theta)"
         y = amp * math.cos(math.radians((float(freq) * x) + phase))
 
-        # Find m, the gradient, which is found through the equation: "-1/-fA sin(fx + theta)", i.e. -1 over dy/dx
+        # Find m, the gradient, which is found through the equation: "-1 * -fA sin(fx + theta)", i.e. -1 times dy/dx
         # If m is zero, then set it to a gradient that will essentially create a straight vertical line.
         if (-amp * freq * math.sin(math.radians((float(freq) * x) + phase)) < 0.000001) and (
                 -amp * freq * math.sin(math.radians((float(freq) * x) + phase)) > -0.000001):
-            m = -1 / 0.0001
+            m = -1 / 0.00000001
         else:
-            m = -1 / (-amp * freq * math.sin(math.radians((float(freq) * x) + phase)))
+            m = -1 * (-amp * freq * math.sin(math.radians((float(freq) * x) + phase)))
 
-        return super.draw_normal(graph, x, y, m)
+        return super(CosCalc, self).draw_normal(graph, x, y, m)
+
+    def draw_graph(self, graph, amp, freq, phase):
+        prev_x = 0
+        prev_y = 0
+
+        for x in range(720 + 1):
+            y = amp * math.cos(math.radians((float(freq) * x) + phase))
+
+            super(CosCalc, self).draw_line(graph, x, y, prev_x, prev_y)
+
+            prev_x = x
+            prev_y = y
+
+    def update_equation_label(self, dyn, amp, freq, phase):
+        dyn.config(text="y = " + amp + "cos(" + freq + "x + " + phase + ")")
