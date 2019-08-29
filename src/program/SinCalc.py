@@ -1,8 +1,8 @@
 import math
-import Calc as calc
+from program.Calc import Calc
 
 
-class SinCalc(calc.Calc):
+class SinCalc(Calc):
     def calculate_tangent(self, graph, x, amp, freq, phase):
         # Find y, which is found through the equation: "A sin(fx + theta)"
         y = amp * math.sin(math.radians((float(freq) * x) + phase))

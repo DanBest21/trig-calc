@@ -1,8 +1,8 @@
 import math
-import Calc as calc
+from program.Calc import Calc
 
 
-class TanCalc(calc.Calc):
+class TanCalc(Calc):
     def calculate_tangent(self, graph, x, amp, freq, phase):
         # Find y, which is found through the equation: "A tan(fx + theta)"
         y = amp * math.tan(math.radians((float(freq) * x) + phase))

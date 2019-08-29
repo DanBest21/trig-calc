@@ -1,10 +1,8 @@
-import Tkinter as tk
-import tkMessageBox
-import Menu as menu
-import HelpWindow as help
-import program.SinCalc as sin
-import program.CosCalc as cos
-import program.TanCalc as tan
+import tkinter as tk
+import tkinter.messagebox as message
+from program.SinCalc import SinCalc
+from program.CosCalc import CosCalc
+from program.TanCalc import TanCalc
 
 g_b_xvalue_negative = False
 g_b_phase_negative = False
@@ -18,7 +16,7 @@ class GraphView(tk.Frame):
         try:
             self.configure_graph_function(func)
         except ValueError as ex:
-            tkMessageBox.showerror("Tangent/Normal Calculator", "Error - " + str(ex))
+            message.showerror("Tangent/Normal Calculator", "Error - " + str(ex))
 
         # Bind the validateNumber function to the self.master, so it can be associated to particular elements.
         vcmd = self.master.register(self.calc.validate_number)
@@ -108,12 +106,12 @@ class GraphView(tk.Frame):
 
         # Button that opens the help menu by calling the "createHelpWindow()" function.
         btn_help = tk.Button(self, text="Show Help", font="Arial 12 bold", bg="gray30", fg="white", width=30,
-                                  command=lambda: self.open_help_window(func))
+                                  command=lambda: self.master.navigate_to_help_frame(func))
         btn_help.grid(row=9, column=0, columnspan=4, padx=25, pady=5)
 
         # Button that returns the user to main menu by calling the "returnToMainMenu()" function.
         btn_menu = tk.Button(self, text="Return to Main Menu", font="Arial 12 bold", bg="gray30", fg="white",
-                                  width=30, command=lambda: self.return_to_menu())
+                                  width=30, command=lambda: self.master.navigate_to_menu())
         btn_menu.grid(row=10, column=0, columnspan=4, padx=25, pady=(5, 25))
 
         # Scales that determine the amplitude of the sine, cosine or tangent line.
@@ -153,11 +151,11 @@ class GraphView(tk.Frame):
 
     def configure_graph_function(self, func):
         if (func == "Sine"):
-            self.calc = sin.SinCalc()
+            self.calc = SinCalc()
         elif (func == "Cosine"):
-            self.calc = cos.CosCalc()
+            self.calc = CosCalc()
         elif (func == "Tangent"):
-            self.calc = tan.TanCalc()
+            self.calc = TanCalc()
         else:
             raise ValueError("Function '" + str(func) + "' is undefined.")
 
@@ -214,14 +212,3 @@ class GraphView(tk.Frame):
             nom_dyn.config(text=self.calc.calculate_normal(graph, self.calc.convert_to_float(x), amp, freq, self.calc.convert_to_float(phase)))
         else:
             nom_dyn.config(text="")
-
-    def open_help_window(self, func):
-        frame = help.HelpWindow(self.master, func)
-        self.master.title("Tangent/Normal Calculator - Help")
-        frame.pack()
-        self.destroy()
-
-    def return_to_menu(self):
-        frame = menu.Menu(self.master)
-        frame.pack()
-        self.destroy()

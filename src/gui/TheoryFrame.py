@@ -1,10 +1,9 @@
-import Tkinter as tk
-import Menu as menu
+import tkinter as tk
 
 
 class TheoryWindow(tk.Frame):
-    def __init__(self, *args, **kwargs):
-        tk.Frame.__init__(self, *args, **kwargs)
+    def __init__(self, parent, **kwargs):
+        tk.Frame.__init__(self, parent, **kwargs)
         self.configure(bg="white")
 
         # Theory definitions
@@ -39,7 +38,7 @@ class TheoryWindow(tk.Frame):
         lbl_tan_3.grid(row=6, rowspan=3, column=0, padx=(10, 5), pady=5, sticky=tk.W)
 
         # Create a PhotoImage object that contains a GIF file that is stored in the active directory of the application.
-        figure_1 = tk.PhotoImage(file="../img/figure_1.gif")
+        figure_1 = tk.PhotoImage(file="img/figure_1.gif")
 
         # Create a Label object to place the PhotoImage into.
         # This association must be explicitly made in a separate line in order to get around an issue with tk itself that causes it to not always appear otherwise.
@@ -59,7 +58,7 @@ class TheoryWindow(tk.Frame):
         lbl_norm.grid(row=10, rowspan=2, column=0, padx=(10, 5), pady=5, sticky=tk.NW)
 
         # Create a PhotoImage object that contains a GIF file that is stored in the active directory of the application.
-        figure_2 = tk.PhotoImage(file="../img/figure_2.gif")
+        figure_2 = tk.PhotoImage(file="img/figure_2.gif")
 
         # Create a Label object to place the PhotoImage into.
         # This association must be explicitly made in a separate line in order to get around an issue with tk itself that causes it to not always appear otherwise.
@@ -73,10 +72,5 @@ class TheoryWindow(tk.Frame):
         # Button that closes the theory window and returns to the main menu.
         btn_menu = tk.Button(self, text="Return to Main Menu", font="Arial 12 bold", bg="gray30",
                                   fg="white",
-                                  width=30, command=lambda: self.return_to_menu())
+                                  width=30, command=lambda: self.master.navigate_to_menu())
         btn_menu.grid(row=12, column=0, columnspan=2, padx=25, pady=(15, 25))
-
-    def return_to_menu(self):
-        frame = menu.Menu(self.master)
-        frame.pack()
-        self.destroy()

@@ -1,8 +1,8 @@
 import math
-import Calc as calc
+from program.Calc import Calc
 
 
-class CosCalc(calc.Calc):
+class CosCalc(Calc):
     def calculate_tangent(self, graph, x, amp, freq, phase):
         # Find y, which is found through the equation: "A cos(fx + theta)"
         y = amp * math.cos(math.radians((float(freq) * x) + phase))

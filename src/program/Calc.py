@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 import math
-import tkMessageBox
+import tkinter.messagebox as message
 
 
 class Calc:
@@ -31,7 +31,7 @@ class Calc:
         try:
             return float(variable)
         except Exception as ex:
-            tkMessageBox.showerror("Tangent/Normal Calculator", "Error - " + str(ex))
+            message.showerror("Tangent/Normal Calculator", "Error - " + str(ex))
 
     def validate_number(self, modificationType, newValue, completeValue):
         if (modificationType == "1") and (newValue in "0123456789."):
