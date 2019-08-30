@@ -21,13 +21,13 @@ class CosCalc(Calc):
         # Find y, which is found through the equation: "A cos(fx + theta)"
         y = amp * math.cos(math.radians((float(freq) * x) + phase))
 
-        # Find m, the gradient, which is found through the equation: "-1 * -fA sin(fx + theta)", i.e. -1 times dy/dx
+        # Find m, the gradient, which is found through the equation: "-1 * -fA sin(fx + theta)", i.e. -1 over dy/dx
         # If m is zero, then set it to a gradient that will essentially create a straight vertical line.
         if (-amp * freq * math.sin(math.radians((float(freq) * x) + phase)) < 0.000001) and (
                 -amp * freq * math.sin(math.radians((float(freq) * x) + phase)) > -0.000001):
             m = -1 / 0.00000001
         else:
-            m = -1 * (-amp * freq * math.sin(math.radians((float(freq) * x) + phase)))
+            m = -1 / (-amp * freq * math.sin(math.radians((float(freq) * x) + phase)))
 
         return super(CosCalc, self).draw_normal(graph, x, y, m)
 

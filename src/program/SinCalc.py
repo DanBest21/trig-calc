@@ -21,13 +21,13 @@ class SinCalc(Calc):
         # Find y, which is found through the equation: "A sin(fx + theta)"
         y = amp * math.sin(math.radians((float(freq) * x) + phase))
 
-        # Find m, the gradient, which is found through the equation: "-1 * fA cos(fx + theta)", i.e. -1 times dy/dx
+        # Find m, the gradient, which is found through the equation: "-1 / fA cos(fx + theta)", i.e. -1 over dy/dx
         # If m is zero, then set it to a gradient that will essentially create a straight vertical line.
         if (amp * freq * math.cos(math.radians((float(freq) * x) + phase)) < 0.000001) and (
                 amp * freq * math.cos(math.radians((float(freq) * x) + phase)) > -0.000001):
             m = -1 / 0.00000001
         else:
-            m = -1 * (amp * freq * math.cos(math.radians((float(freq) * x) + phase)))
+            m = -1 / (amp * freq * math.cos(math.radians((float(freq) * x) + phase)))
 
         return super(SinCalc, self).draw_normal(graph, x, y, m)
 
