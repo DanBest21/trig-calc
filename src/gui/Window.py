@@ -5,6 +5,7 @@ from gui.Menu import Menu
 from gui.TheoryFrame import TheoryWindow
 
 
+# A subclass of tkinter.Tk that implements navigation functions to the various different frames of the application.
 class Window(Tk):
     def __init__(self):
         Tk.__init__(self)
@@ -49,6 +50,7 @@ class Window(Tk):
         self.title("Tangent/Normal Calculator - Help")
         frame.pack()
 
+    # Supplementary function that closes any open frames.
     def clear_window(self):
         for frame in self.winfo_children():
             frame.destroy()

@@ -2,6 +2,7 @@ import math
 from program.Calc import Calc
 
 
+# Implementation of the Calc class for the Cosine function.
 class CosCalc(Calc):
     def calculate_tangent(self, graph, x, amp, freq, phase):
         # Find y, which is found through the equation: "A cos(fx + theta)"

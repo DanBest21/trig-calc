@@ -2,6 +2,7 @@ import math
 from program.Calc import Calc
 
 
+# Implementation of the Calc class for the Tangent function.
 class TanCalc(Calc):
     def calculate_tangent(self, graph, x, amp, freq, phase):
         # Find y, which is found through the equation: "A tan(fx + theta)"

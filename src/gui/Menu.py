@@ -1,6 +1,7 @@
 import tkinter as tk
 
 
+# A subclass of the tkinter.Frame class that produces  the main menu of the application.
 class Menu(tk.Frame):
     def __init__(self, *args, **kwargs):
         tk.Frame.__init__(self, *args, **kwargs)

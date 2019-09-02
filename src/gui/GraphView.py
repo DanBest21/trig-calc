@@ -5,6 +5,7 @@ from program.CosCalc import CosCalc
 from program.TanCalc import TanCalc
 
 
+# A subclass of the tkinter.Frame class that displays a graph view.
 class GraphView(tk.Frame):
     def __init__(self, parent, func, **kwargs):
         tk.Frame.__init__(self, parent, **kwargs)
@@ -22,7 +23,7 @@ class GraphView(tk.Frame):
         vcmd = self.master.register(self.calc.validate_number)
 
         lbl_title = tk.Label(self, text="Tangent/Normal Calculator - " + func + " Graph",
-                                  font="Arial 14 bold underline", bg="white")
+                             font="Arial 14 bold underline", bg="white")
         lbl_title.grid(row=0, column=0, columnspan=6, padx=5, pady=25)
 
         # Text field that allows the user to specify what point (x co-ordinate) on the graph that they want to base the tangent and normal from.
@@ -30,11 +31,11 @@ class GraphView(tk.Frame):
         lbl_xvalue.grid(row=1, column=0, padx=(25, 5), pady=(5, 0), sticky=tk.E)
 
         btn_neg_xvalue = tk.Button(self, text="-", font="Arial 12 bold", bg="gray30", fg="white", width=3,
-                                        relief=tk.RAISED, command=lambda: self.set_negative(btn_neg_xvalue, "xvalue"))
+                                   relief=tk.RAISED, command=lambda: self.set_negative(btn_neg_xvalue, "xvalue"))
         btn_neg_xvalue.grid(row=1, column=1, padx=(5, 0), pady=(5, 0), sticky=tk.E)
 
         txt_xvalue = tk.Entry(self, font="Arial 12", width=15, validate="key",
-                                   validatecommand=(vcmd, "%d", "%S", "%P"))
+                              validatecommand=(vcmd, "%d", "%S", "%P"))
         txt_xvalue.grid(row=1, column=2, padx=5, pady=(5, 0), sticky=tk.W)
 
         lbl_rads = tk.Label(self, text="units", font="Arial 12 bold", bg="white")
@@ -45,11 +46,11 @@ class GraphView(tk.Frame):
         lbl_phase.grid(row=2, column=0, padx=(25, 5), pady=(5, 0), sticky=tk.E)
 
         btn_neg_phase = tk.Button(self, text="-", font="Arial 12 bold", bg="gray30", fg="white", width=3,
-                                       relief=tk.RAISED, command=lambda: self.set_negative(btn_neg_phase, "phase"))
+                                  relief=tk.RAISED, command=lambda: self.set_negative(btn_neg_phase, "phase"))
         btn_neg_phase.grid(row=2, column=1, padx=(5, 0), pady=(5, 0), sticky=tk.E)
 
         txt_phase = tk.Entry(self, font="Arial 12", width=15, validate="key",
-                                  validatecommand=(vcmd, "%d", "%S", "%P"))
+                             validatecommand=(vcmd, "%d", "%S", "%P"))
         txt_phase.grid(row=2, column=2, padx=5, pady=(5, 0), sticky=tk.W)
 
         lbl_degrees = tk.Label(self, text="degrees", font="Arial 12 bold", bg="white")
@@ -110,22 +111,23 @@ class GraphView(tk.Frame):
 
         # Button that applies any changes made and updates the graph pane and dynamic labels of the equations accordingly.
         btn_apply = tk.Button(self, text="Apply Changes", font="Arial 12 bold", bg="gray30", fg="white",
-                                   width=30,
-                                   command=lambda: self.apply_changes(graph, dyn_equation, dyn_xvalue_radians, dyn_tangent_eq,
-                                                                dyn_normal_eq, dyn_scaled_eq,
-                                                                var_tangent.get(), var_normal.get(), txt_xvalue.get(),
-                                                                scl_amplitude.get(), scl_frequency.get(),
-                                                                txt_phase.get()))
+                              width=30,
+                              command=lambda: self.apply_changes(graph, dyn_equation, dyn_xvalue_radians,
+                                                                 dyn_tangent_eq,
+                                                                 dyn_normal_eq, dyn_scaled_eq,
+                                                                 var_tangent.get(), var_normal.get(), txt_xvalue.get(),
+                                                                 scl_amplitude.get(), scl_frequency.get(),
+                                                                 txt_phase.get()))
         btn_apply.grid(row=10, column=0, columnspan=4, padx=25, pady=(25, 5))
 
         # Button that opens the help menu by calling the "createHelpWindow()" function.
         btn_help = tk.Button(self, text="Show Help", font="Arial 12 bold", bg="gray30", fg="white", width=30,
-                                  command=lambda: self.master.navigate_to_help_frame(func))
+                             command=lambda: self.master.navigate_to_help_frame(func))
         btn_help.grid(row=11, column=0, columnspan=4, padx=25, pady=5)
 
         # Button that returns the user to main menu by calling the "returnToMainMenu()" function.
         btn_menu = tk.Button(self, text="Return to Main Menu", font="Arial 12 bold", bg="gray30", fg="white",
-                                  width=30, command=lambda: self.master.navigate_to_menu())
+                             width=30, command=lambda: self.master.navigate_to_menu())
         btn_menu.grid(row=12, column=0, columnspan=4, padx=25, pady=(5, 25))
 
         # Scales that determine the amplitude of the sine, cosine or tangent line.
@@ -133,12 +135,12 @@ class GraphView(tk.Frame):
         # If the graph is a sine or cosine graph, then set the amplitude range from 0 to 200, and give it a default value of 100.
         if (func == "Sine") or (func == "Cosine"):
             scl_amplitude = tk.Scale(self, font="Arial 12 bold", from_=0, to=200, orient=tk.HORIZONTAL,
-                                          bg="white", length=250)
+                                     bg="white", length=250)
             scl_amplitude.set(100)
         # Else if the graph is a tangent graph, then set the amplitude range from 0 to 50, and give it a default value of 25.
         elif (func == "Tangent"):
             scl_amplitude = tk.Scale(self, font="Arial 12 bold", from_=0, to=100, orient=tk.HORIZONTAL,
-                                          bg="white", length=250)
+                                     bg="white", length=250)
             scl_amplitude.set(50)
 
         scl_amplitude.grid(row=10, rowspan=2, column=4, padx=5, pady=(25, 0))
@@ -148,7 +150,7 @@ class GraphView(tk.Frame):
 
         # Scales that determine the frequency of the sine, cosine or tangent line.
         scl_frequency = tk.Scale(self, font="Arial 12 bold", from_=0, to=10, resolution=0.05,
-                                      orient=tk.HORIZONTAL, bg="white", length=250)
+                                 orient=tk.HORIZONTAL, bg="white", length=250)
         scl_frequency.set(1)
         scl_frequency.grid(row=10, rowspan=2, column=5, padx=5, pady=(25, 0))
 
@@ -160,9 +162,11 @@ class GraphView(tk.Frame):
         graph.grid(row=1, rowspan=9, column=4, columnspan=2, padx=(0, 25))
 
         # Draw a graph based on the default options of the self.master.
-        self.apply_changes(graph, dyn_equation, dyn_xvalue_radians, dyn_tangent_eq, dyn_normal_eq, dyn_scaled_eq, var_tangent.get(), var_normal.get(),
-                     txt_xvalue.get(), scl_amplitude.get(), scl_frequency.get(), txt_phase.get())
+        self.apply_changes(graph, dyn_equation, dyn_xvalue_radians, dyn_tangent_eq, dyn_normal_eq, dyn_scaled_eq,
+                           var_tangent.get(), var_normal.get(),
+                           txt_xvalue.get(), scl_amplitude.get(), scl_frequency.get(), txt_phase.get())
 
+    # Set the calc variable to the correct type of calculator based on the func variable.
     def configure_graph_function(self, func):
         if (func == "Sine"):
             self.calc = SinCalc()
@@ -217,13 +221,15 @@ class GraphView(tk.Frame):
 
         # If the "Show Tangent" checkbox is checked, then calculate the tangent and add in the appropriate line.
         if (x != "") and (tan_chk == True):
-            tan_dyn.config(text=self.calc.calculate_tangent(graph, self.calc.convert_to_float(x), amp, freq, self.calc.convert_to_float(phase)))
+            tan_dyn.config(text=self.calc.calculate_tangent(graph, self.calc.convert_to_float(x), amp, freq,
+                                                            self.calc.convert_to_float(phase)))
         else:
             tan_dyn.config(text="")
 
         # If the "Show Normal" checkbox is checked, then calculate the normal and add in the appropriate line.
         if (x != "") and (nom_chk == True):
-            eq = self.calc.calculate_normal(graph, self.calc.convert_to_float(x), amp, freq, self.calc.convert_to_float(phase))
+            eq = self.calc.calculate_normal(graph, self.calc.convert_to_float(x), amp, freq,
+                                            self.calc.convert_to_float(phase))
             nom_dyn.config(text=eq[0])
             scl_dyn.config(text=eq[1])
         else:

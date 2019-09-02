@@ -2,6 +2,7 @@ import math
 from program.Calc import Calc
 
 
+# Implementation of the Calc class for the Sine function.
 class SinCalc(Calc):
     def calculate_tangent(self, graph, x, amp, freq, phase):
         # Find y, which is found through the equation: "A sin(fx + theta)"

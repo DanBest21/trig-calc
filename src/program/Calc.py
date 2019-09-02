@@ -3,6 +3,7 @@ import math
 import tkinter.messagebox as message
 
 
+# Abstract class that contains both common functions for the calculator, and abstract methods that are implemented by its children classes.
 class Calc:
     __metaclass__ = ABCMeta
 
@@ -36,6 +37,8 @@ class Calc:
         except Exception as ex:
             message.showerror("Tangent/Normal Calculator", "Error - " + str(ex))
 
+    # Supplemental function that acts as an input mask to any value in the x value or phase angle text fields to
+    # ensure they are numerical and therefore valid.
     def validate_number(self, modificationType, newValue, completeValue):
         if (modificationType == "1") and (newValue in "0123456789."):
             try:
