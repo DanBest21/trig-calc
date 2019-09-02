@@ -16,7 +16,7 @@ class HelpWindow(tk.Frame):
         lbl_xvalue.grid(row=1, column=0, padx=(10, 5), pady=5, sticky=tk.W)
 
         txt_xvalue = tk.Label(self,
-                              text="Determines the value on the x-axis from which the tangent and normal lines are derived from. The \"-\" button can be used to turn this value negative. This value must be a number.",
+                              text="Determines the value on the x-axis from which the tangent and normal lines are derived from. The \"-\" button can be used to turn this value negative. As this value is converted into radians to align with how the graph itself is drawn, the \"X Value in Radians\" field outputs this value in radians to show what value is being used to create the tangent and normal equations. This value must be a number.",
                               font="Arial 12", bg="white", wraplength=800, justify=tk.LEFT)
         txt_xvalue.grid(row=1, column=1, padx=(5, 10), pady=5, sticky=tk.W)
 
